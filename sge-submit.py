@@ -81,8 +81,8 @@ RESOURCE_MAPPING = {
 def add_custom_resources(resources, resource_mapping=RESOURCE_MAPPING):
     """Adds new resources to resource_mapping.
 
-       resources -> dict where key is sge resource name and value is a
-                    single name or a list of names to be used as aliased
+    resources -> dict where key is sge resource name and value is a
+                 single name or a list of names to be used as aliased
     """
     for key, val in resources.items():
         if key not in resource_mapping:
@@ -133,6 +133,10 @@ def parse_qsub_settings(
 
     for skey, sval in source.items():
         found = False
+        if skey in ["processors", "n_procs"]:
+            found = True
+            job_options["options"].update({"pe": f"thread {sval}"})
+            continue
         for rkey, rval in resource_mapping.items():
             if skey in rval:
                 found = True
