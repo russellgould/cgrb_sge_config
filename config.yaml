@@ -1,0 +1,9 @@
+restart-times: 0
+cluster: "sge-submit.py"
+cluster-status: "sge-status.py"
+jobscript: jobscript.sh
+max-jobs-per-second: 1
+max-status-checks-per-second: 1
+latency-wait: 60
+local-cores: 1
+jobs: 10
